@@ -36,7 +36,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          unityVersion: 2020.1.17f1
+          unityVersion: 2020.1.13f1
           targetPlatform: StandaloneWindows
 
       # Build
@@ -45,7 +45,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          unityVersion: 2020.1.17f1
+          unityVersion: 2020.1.13f1
           targetPlatform: WebGL
 
       # Output
