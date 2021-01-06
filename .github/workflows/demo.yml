@@ -40,21 +40,15 @@ jobs:
           targetPlatform: StandaloneWindows
           buildName: build
 
-      # Build
-      # - name: Build WebGL
-      #   uses: webbertakken/unity-builder@v0.10
-      #   env:
-      #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      #   with:
-      #     unityVersion: 2020.1.13f1
-      #     targetPlatform: WebGL
-
       # Output
       # - uses: actions/upload-artifact@v1
       #   id: upload_artifact
       #   with:
       #     name: Build
       #     path: build
+      - name: Zip project # This would actually build your project, using zip for an example artifact
+        run: |
+            zip -r build.zip build
 
       - name: Create Release
         id: create_release
@@ -74,6 +68,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: build
+          asset_path: build.zip
           asset_name: Build.zip
           asset_content_type: application/zip
