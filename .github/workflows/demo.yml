@@ -61,7 +61,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          artifacts: build
+          artifacts: "${{ steps.upload_artifact.name }}.zip"
           #"${{ steps.upload_artifact.FATENAME }}.zip"
           tag_name: latest
           #${{ github.event.release.tag_name }}
