@@ -48,7 +48,6 @@ jobs:
       #     unityVersion: 2020.1.13f1
       #     targetPlatform: WebGL
 
-      - uses: actions/checkout@v2
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
             zip --junk-paths my-artifact README.md
