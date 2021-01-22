@@ -26,13 +26,13 @@ jobs:
 
       # # Test
       - name: Run tests
-        uses: webbertakken/unity-test-runner@v1.5
+        uses: webbertakken/unity-test-runner@v1.7
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 2020.1.13f1
           # targetPlatform: Linux64  
-          # customParameters: '-batchmode -nographics' # <--- This is the important bit
+          customParameters: '-nographics' # <--- This is the important bit
           
       # Upload Artifacts
       - name: Upload Artifacts
