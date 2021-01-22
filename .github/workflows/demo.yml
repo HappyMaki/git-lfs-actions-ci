@@ -8,8 +8,8 @@ env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
-  build:
-    name: Build my project ✨
+  job1:
+    name: Checkout Repository #Build my project ✨
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,6 +22,10 @@ jobs:
           path: Library
           key: Library
 
+  job2:
+    name: Edit and Play Mode Tests 
+    runs-on: ubuntu-latest
+    steps:
       - name: Run tests
         uses: webbertakken/unity-test-runner@v1.7
         env:
@@ -78,7 +82,7 @@ jobs:
         with:
           webhook_id: ${{ secrets.WEBHOOK_ID }}
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-          args: The ${{ github.event_name }} event was successful.
+          args: Build and Unit Tests were successful. For more details... ${{ steps.create_release.outputs.html_url }} 
 
       - name: send custom message with args
         if: ${{ failure() }}
@@ -86,6 +90,6 @@ jobs:
         with:
           webhook_id: ${{ secrets.WEBHOOK_ID }}
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-          args: FAILURE. FAILURE. The ${{ github.event_name }} event failed.
+          args: FAILURE SENPAI! FAILURE. For more details... $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
 
       
