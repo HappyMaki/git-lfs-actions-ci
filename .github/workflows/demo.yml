@@ -30,7 +30,7 @@ jobs:
           unityVersion: 2020.1.13f1
           customParameters: '-nographics' # <--- This is the important bit
           
-      - name: Upload Artifacts
+      - name: Upload Artifacts on Test Failure
         if: ${{ failure() }}
         uses: actions/upload-artifact@v1
         with:
@@ -73,7 +73,7 @@ jobs:
           asset_content_type: application/zip
 
 
-      - name: send custom message with args
+      - name: Send Success Notification
         if: ${{ success() }}
         uses: appleboy/discord-action@master
         with:
@@ -81,7 +81,7 @@ jobs:
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
           args: Build and Unit Tests were successful. For more details... ${{ steps.create_release.outputs.html_url }} 
 
-      - name: send custom message with args
+      - name: Send Failure Notification
         if: ${{ failure() }}
         uses: appleboy/discord-action@master
         with:
