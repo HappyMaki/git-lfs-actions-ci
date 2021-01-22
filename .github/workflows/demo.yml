@@ -24,19 +24,6 @@ jobs:
           path: Library
           key: Library
 
-      - name: Request manual activation file
-      id: getManualLicenseFile
-      uses: webbertakken/unity-request-manual-activation-file@v1.1
-      with:
-        # CHANGE: Add -windows, causes it to use the correct/same docker image as for build step
-        unityVersion: 2019.2.2f1-windows
-      - name: Expose as artifact
-        uses: actions/upload-artifact@v1
-        with:
-          # CHANGE: Use hard-coded filename because unity-request-manual-activation returns "Unity_v2019.2.2f1-windows.alf" as the output.
-          name: Unity_v2019.2.2f1.alf
-          path: Unity_v2019.2.2f1.alf
-
       # # Test
       - name: Run tests
         uses: webbertakken/unity-test-runner@v1.4
@@ -44,6 +31,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 2020.1.13f1
+          customParameters: '-nographics' # <--- This is the important bit
           
       # Upload Artifacts
       - name: Upload Artifacts
