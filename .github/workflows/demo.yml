@@ -29,8 +29,8 @@ jobs:
         uses: webbertakken/unity-test-runner@v1.4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        # with:
-          # unityVersion: 2020.1.13f1
+        with:
+          unityVersion: 2020.1.13f1
           
       # Upload Artifacts
       - name: Upload Artifacts
