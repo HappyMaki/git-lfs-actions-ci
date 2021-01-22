@@ -12,36 +12,30 @@ jobs:
     name: Build my project ✨
     runs-on: ubuntu-latest
     steps:
-      # Checkout
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           lfs: true
 
-      # Cache
       - uses: actions/cache@v1.1.0
         with:
           path: Library
           key: Library
 
-      # # Test
       - name: Run tests
         uses: webbertakken/unity-test-runner@v1.7
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 2020.1.13f1
-          # targetPlatform: Linux64  
           customParameters: '-nographics' # <--- This is the important bit
           
-      # Upload Artifacts
       - name: Upload Artifacts
         uses: actions/upload-artifact@v1
         with:
           name: Test results
           path: artifacts
 
-      # Build
       - name: Build StandaloneWindows
         uses: webbertakken/unity-builder@v0.10
         env:
@@ -77,9 +71,21 @@ jobs:
           asset_name: Build.zip
           asset_content_type: application/zip
 
+
       - name: send custom message with args
+        if: ${{ success() }}
         uses: appleboy/discord-action@master
         with:
           webhook_id: ${{ secrets.WEBHOOK_ID }}
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-          args: The ${{ github.event_name }} event triggered first step.
+          args: The ${{ github.event_name }} event was successful.
+
+      - name: send custom message with args
+        if: ${{ failure() }}
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          args: FAILURE. FAILURE. The ${{ github.event_name }} event failed.
+
+      
