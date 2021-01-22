@@ -31,6 +31,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 2020.1.13f1
+          targetPlatform: StandaloneWindows64 
           customParameters: '-nographics' # <--- This is the important bit
           
       # Upload Artifacts
