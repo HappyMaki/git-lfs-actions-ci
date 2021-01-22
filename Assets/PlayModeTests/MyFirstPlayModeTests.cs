@@ -13,7 +13,7 @@ namespace Tests
         public void MyFirstPlayModeTestsSimplePasses()
         {
             // Use the Assert class to test conditions
-            Assert.AreEqual(0, 0);
+            Assert.AreEqual(1, 0);
         }
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
