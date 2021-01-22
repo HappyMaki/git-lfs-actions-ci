@@ -30,18 +30,12 @@ jobs:
           unityVersion: 2020.1.13f1
           customParameters: '-nographics' # <--- This is the important bit
           
-  
       - name: Upload Artifacts
-        if: ${{ failure() }}
         uses: actions/upload-artifact@v1
         with:
           name: Test results
           path: artifacts
 
-    job2:
-      name: Build StandaloneWindows
-      runs-on: ubuntu-latest
-      steps:
       - name: Build StandaloneWindows
         uses: webbertakken/unity-builder@v0.10
         env:
