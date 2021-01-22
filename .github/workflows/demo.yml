@@ -31,6 +31,8 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 2020.1.13f1
+          projectPath: ./
+          artifactsPath: artifacts
 
       # Build
       - name: Build StandaloneWindows
